@@ -1,6 +1,7 @@
 // var http = require('http');
 var Accessory, Service, Characteristic, UUIDGen;
 const WebSocket = require('ws');
+const ReconnectingWebSocket = require('reconnecting-websocket');
 // import ReconnectingWebSocket from 'reconnecting-websocket';
 
 module.exports = function (homebridge) {
@@ -76,7 +77,6 @@ SamplePlatform.prototype.addAccessory = function (veewapDevice) {
   newAccessory.on('identify', function (paired, callback) {
 
     // 命名的时候调用
-
     platform.log(newAccessory.displayName, "Identify!!!");
     callback();
   });
@@ -235,17 +235,17 @@ SamplePlatform.prototype.getAccessaryByID = function (ID) {
 }
 
 
-
+// 增加JSON对解析
 SamplePlatform.prototype.sendMessage = function (data) {
   var message = JSON.stringify(data);
-  if (this.ws.readyState === 3) {
-    this.ws.terminate();
-    this.connectToWebSocket();
-    setTimeout(() => {
-      this.ws.send(message);
-    }, 3.0);
-  }else{
+  this.log(`message : ${message}`);
+
+  // this.ws.send(message);
+
+  if (this.ws.readyState === 1) {
     this.ws.send(message);
+  }else{
+    this.ws.reconnect();
   }
   
 }
@@ -253,13 +253,19 @@ SamplePlatform.prototype.sendMessage = function (data) {
 
 SamplePlatform.prototype.connectToWebSocket = function (message) {
 
-  const ws = new WebSocket('ws://192.168.3.65:9054');
+  const options = {
+    WebSocket: WebSocket, // custom WebSocket constructor
+    connectionTimeout: 1000,
+    maxRetries: 10,
+  };
+
+  const ws = new ReconnectingWebSocket('ws://192.168.3.65:9054', [], options);
   this.ws = ws;
 
-  ws.on('message', function incoming(data) {
+  ws.addEventListener('message', function incoming(messageEvent) {
     // console.log(data);
     // console.log(`data的类型是 ${typeof data}`);
-    const message = JSON.parse(data);
+    const message = JSON.parse(messageEvent.data);
     // 注意这里this 指向Websocket
     // console.log(this);
     // console.log(`this的类型是 ${typeof this}`);
@@ -305,7 +311,7 @@ SamplePlatform.prototype.connectToWebSocket = function (message) {
     }
   }.bind(this))
 
-  ws.on('open', function open() {
+  ws.addEventListener('open', function open() {
     var openMessage = {};
     openMessage.type = 0;
 

@@ -8,7 +8,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "npm run dev",
             "program": "${workspaceFolder}/bin/homebridge",
             "args": [
                 "DEBUG=*",
@@ -22,7 +22,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "NPM",
+            "name": "NPM-失败",
             "runtimeExecutable": "npm",
             "runtimeArgs": [
                 "run",
