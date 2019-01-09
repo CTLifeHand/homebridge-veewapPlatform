@@ -259,7 +259,7 @@ SamplePlatform.prototype.connectToWebSocket = function (message) {
     maxRetries: 10,
   };
 
-  const ws = new ReconnectingWebSocket('ws://192.168.3.65:9054', [], options);
+  const ws = new ReconnectingWebSocket('ws://192.168.3.82:9054', [], options);
   this.ws = ws;
 
   ws.addEventListener('message', function incoming(messageEvent) {
