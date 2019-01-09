@@ -320,7 +320,6 @@ SamplePlatform.prototype.connectToWebSocket = function (message) {
 
     ws.send(string);
   }.bind(this))
-
 }
 
 
