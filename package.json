@@ -1,5 +1,5 @@
 {
-  "name": "VeeWapBridge",
+  "name": "veewapbridge",
   "description": "HomeKit support for the VeeWap",
   "version": "0.4.45",
   "scripts": {
