@@ -3,7 +3,7 @@
   "description": "HomeKit support for the VeeWap",
   "version": "0.4.45",
   "scripts": {
-    "dev": "DEBUG=* ./bin/homebridge -D -P example-plugins/ || true"
+    "dev": "git pull && DEBUG=* ./bin/homebridge -D -P example-plugins/ || true"
   },
   "author": {
     "name": "TonyChan"
