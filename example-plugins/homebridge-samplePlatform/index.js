@@ -2,7 +2,28 @@
 var Accessory, Service, Characteristic, UUIDGen;
 const WebSocket = require('ws');
 const ReconnectingWebSocket = require('reconnecting-websocket');
-// import ReconnectingWebSocket from 'reconnecting-websocket';
+import ReconnectingWebSocket from 'reconnecting-websocket';
+
+
+var SerialPort = require("serialport").SerialPort;
+var serialPort = new SerialPort("/dev/ttyS1", {
+  baudrate: 921600
+});
+serialPort.on("data", function (data) {
+  data = +data;
+  console.log(data);
+});
+
+
+// var serialPort = require("serialport");
+// serialPort.list(function (err, ports) {
+//   ports.forEach(function (port) {
+//     console.log(port.comName);
+//     console.log(port.pnpId);
+//     console.log(port.manufacturer);
+//   });
+// });
+
 
 module.exports = function (homebridge) {
   console.log("homebridge API version: " + homebridge.version);
