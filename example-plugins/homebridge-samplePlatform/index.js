@@ -5,14 +5,27 @@ const ReconnectingWebSocket = require('reconnecting-websocket');
 // import ReconnectingWebSocket from 'reconnecting-websocket';
 
 
-var SerialPort = require("serialport").SerialPort;
-var serialPort = new SerialPort("/dev/ttyS1", {
-  baudrate: 921600
-});
-serialPort.on("data", function (data) {
-  data = +data;
-  console.log(data);
-});
+const SerialPort = require('serialport')
+const port = new SerialPort('/dev/ttyS1', {
+  baudRate: 921600
+}, function (err) {
+  if (err) {
+    return console.log('Error: ', err.message)
+  }
+})
+
+port.write('main screen turn on', function (err) {
+  if (err) {
+    return console.log('Error on write: ', err.message)
+  }
+  console.log('message written')
+})
+
+port.on('open', function () {
+  // open logic
+  console.log('on open')
+})
+
 
 
 // var serialPort = require("serialport");
