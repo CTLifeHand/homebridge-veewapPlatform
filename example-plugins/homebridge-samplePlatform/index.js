@@ -2,7 +2,7 @@
 var Accessory, Service, Characteristic, UUIDGen;
 const WebSocket = require('ws');
 const ReconnectingWebSocket = require('reconnecting-websocket');
-import ReconnectingWebSocket from 'reconnecting-websocket';
+// import ReconnectingWebSocket from 'reconnecting-websocket';
 
 
 var SerialPort = require("serialport").SerialPort;
