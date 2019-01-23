@@ -24,8 +24,28 @@ port.write('main screen turn on', function (err) {
 port.on('open', function () {
   // open logic
   console.log('on open')
+  port.write('AA000F040010030003040004023ACD')
+  port.write('AA000F040010030003040004010AAE') 
+  port.write('AA000F040010030003040004023ACD')
+  port.write('AA000F040010030003040004010AAE') 
+  port.write('AA000F040010030003040004023ACD')
+  port.write('AA000F040010030003040004010AAE') 
+  port.write('AA000F040010030003040004023ACD')
+  port.write('AA000F040010030003040004010AAE') 
 })
 
+// Read data that is available but keep the stream in "paused mode"
+port.on('readable', function () {
+  console.log('Data:', port.read())
+})
+
+// Switches the port into "flowing mode"
+port.on('data', function (data) {
+  console.log('Data:', data)
+})
+
+// Pipe the data into another stream (like a parser or standard out)
+// const lineStream = port.pipe(new Readline())
 
 
 // var serialPort = require("serialport");
