@@ -24,14 +24,14 @@ port.write('main screen turn on', function (err) {
 port.on('open', function () {
   // open logic
   console.log('on open')
-  port.write('AA000F040010030003040004023ACD')
-  port.write('AA000F040010030003040004010AAE') 
-  port.write('AA000F040010030003040004023ACD')
-  port.write('AA000F040010030003040004010AAE') 
-  port.write('AA000F040010030003040004023ACD')
-  port.write('AA000F040010030003040004010AAE') 
-  port.write('AA000F040010030003040004023ACD')
-  port.write('AA000F040010030003040004010AAE') 
+  port.write('AA000F040010030003040004023ACD','hex')
+  port.write('AA000F040010030003040004010AAE', 'hex') 
+  port.write('AA000F040010030003040004023ACD','hex')
+  port.write('AA000F040010030003040004010AAE','hex') 
+  port.write('AA000F040010030003040004023ACD','hex')
+  port.write('AA000F040010030003040004010AAE','hex') 
+  port.write('AA000F040010030003040004023ACD','hex')
+  port.write('AA000F040010030003040004010AAE','hex') 
 })
 
 // Read data that is available but keep the stream in "paused mode"
